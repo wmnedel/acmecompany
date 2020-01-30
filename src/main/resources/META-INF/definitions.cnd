@@ -1,0 +1,22 @@
+<jmix = 'http://www.jahia.org/jahia/mix/1.0'>
+<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
+<mix = 'http://www.jcp.org/jcr/mix/1.0'>
+<mymix = 'http://www.mydomain.org/jahia/mix/1.0'>
+<mynt = 'http://www.mydomain.org/jahia/nt/1.0'>
+
+[mymix:acmeComponents] > jmix:droppableContent mixin
+
+[mynt:employee] > jnt:content, mymix:acmeComponents, jmix:editorialContent
+ - firstName (string)
+ - lastName (string)
+ - jcr:title (string)
+ - biography (string, richtext) internationalized
+ - photo (weakreference, picker[type='image'])
+ - jobTitle (string, choicelist[resourceBundle]) = 'employee' < 'assistant', 'consultant', 'coordinator', 'director', 'employee', 'manager'
+ - nationality (string, choicelist[country])
+ - birthDate (date)
+ - supervisor (weakreference) < 'mynt:employee'
+
+[mynt:companyDivision] > jnt:content, mix:title, mymix:acmeComponents
+orderable
+ + * (mynt:employee)
